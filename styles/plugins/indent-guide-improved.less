@@ -1,0 +1,14 @@
+
+.indent-guide-improved {
+  width: 2px;
+  background-color: transparent;
+  transition: background-color 0.09s ease-in;
+
+  &.indent-guide-stack {
+    background-color: transparent;
+
+    &.indent-guide-active {
+      background-color: spin(lighten(tint(@syntax-wrap-guide-color, 12%), 12%), -25);
+    }
+  }
+}
