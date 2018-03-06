@@ -55,6 +55,21 @@ atom-panel-container {
       }
     }
 
+    // STICKY HEADER
+    &.is--sticky {
+      z-index: 1;
+      position: fixed;
+      top: @top-bar;
+      background: @bkg;
+      margin-top: 0;
+
+      &.bottom {
+        position: absolute;
+        top: unset;
+        bottom: 0;
+      }
+    }
+
     .icon-repo, .icon-file-directory {
       margin-top: 5px;
       &::before {
@@ -66,12 +81,6 @@ atom-panel-container {
         margin-right:  -5px;
       }
     }
-  }
-
-  // ANCHORED PROJECT HEADER
-  .project-root.is--anchored > .header {
-    position: absolute;
-    top:      auto; bottom: 0;
   }
 }
 

@@ -1,48 +1,55 @@
 atom.packages.activatePackage('tree-view').then (tree) ->
-  IS_ANCHORED_CLASSNAME = 'is--anchored'
-
   treeView = tree.mainModule.treeView
   projectRoots = treeView.roots
+  stickyHeader = null
+  stickyRoot = null
 
-  updateTreeViewHeaderPosition = ->
+  scrollY = 0
+  updating = null
+  treeView.element.addEventListener 'scroll', ->
+    scrollY = treeView.element.scrollTop
+    updating ?= requestAnimationFrame updateStickyHeader
 
-    if treeView.scroller
-      position = treeView.scroller[0] ? treeView.scroller
-    else
-      position = 0
+  updateStickyHeader = ->
+    updating = null
+    prevRoot = stickyRoot
+    prevHeader = stickyHeader
 
-    yScrollPosition = (position).scrollTop
+    for root in projectRoots
+      startY = root.offsetTop
+      endY   = startY + root.offsetHeight
+      if scrollY < endY - root.header.offsetHeight
+        stickyRoot = if scrollY >= startY then root else null
+        if prevRoot is stickyRoot then return else break
 
-    for project in projectRoots
-      projectHeaderHeight = project.header.offsetHeight
-      projectClassList = project.classList
-      projectOffsetY = project.offsetTop
-      projectHeight = project.offsetHeight
+    if prevRoot
 
-      if yScrollPosition > projectOffsetY
-        if yScrollPosition > projectOffsetY + projectHeight - projectHeaderHeight
-          project.header.style.top = 'auto'
-          projectClassList.add IS_ANCHORED_CLASSNAME
-        else
-          project.header.style.top = (yScrollPosition - projectOffsetY) + 'px'
-          projectClassList.remove IS_ANCHORED_CLASSNAME
+      # Remove the previous header if it's under the next header.
+      if prevRoot.offsetTop > scrollY
+        prevHeader.parentNode.removeChild prevHeader
+
+      # Otherwise, preserve the previous header,
+      # but stick it to the bottom of its parent.
+      else prevHeader.classList.add 'bottom'
+
+    if stickyRoot
+      # Look for an existing sticky header.
+      stickyHeader = stickyRoot.querySelector '.header.is--sticky'
+      if stickyHeader
+        # The existing header was stuck to the bottom of its parent.
+        stickyHeader.classList.remove 'bottom'
       else
-        project.header.style.top = '0'
-        projectClassList.remove IS_ANCHORED_CLASSNAME
+        # Clone the normal header and make it sticky.
+        stickyHeader = stickyRoot.header.cloneNode true
+        stickyHeader.classList.add 'is--sticky'
+        stickyRoot.insertBefore stickyHeader, stickyRoot.firstChild
 
   atom.project.onDidChangePaths ->
     projectRoots = treeView.roots
-    updateTreeViewHeaderPosition()
+    updateStickyHeader()
 
-  atom.config.onDidChange 'seti-ui', ->
-    # TODO something other than setTimeout? it's a hack to trigger the update
-    # after the CSS changes have occurred. a gamble, probably inaccurate
-    setTimeout -> updateTreeViewHeaderPosition()
-  if typeof treeView.scroller.on is 'function'
-    treeView.scroller.on 'scroll', updateTreeViewHeaderPosition
-  else
-    treeView.scroller.addEventListener 'scroll', ->
-      updateTreeViewHeaderPosition()
-
-  setTimeout -> # TODO something other than setTimeout?
-    updateTreeViewHeaderPosition()
+  # TODO something other than setTimeout? it's a hack to trigger the update
+  # after the CSS changes have occurred. a gamble, probably inaccurate
+  atom.config.onDidChange 'subzero-ui', ->
+    setTimeout updateStickyHeader
+  setTimeout updateStickyHeader
