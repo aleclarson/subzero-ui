@@ -9,16 +9,12 @@ atom-panel-container {
 
   // PROJECT ROOT
   .project-root {
-    background:     @tree-view-header-color;
-    &:nth-child(2)  { background: lighten(@tree-view-header-color, 1%); }
-    &:nth-child(3)  { background: lighten(@tree-view-header-color, 2%); }
-    &:nth-child(4)  { background: lighten(@tree-view-header-color, 3%); }
-    &:nth-child(5)  { background: lighten(@tree-view-header-color, 4%); }
-    &:nth-child(6)  { background: lighten(@tree-view-header-color, 5%); }
-    &:nth-child(7)  { background: lighten(@tree-view-header-color, 6%); }
-    &:nth-child(8)  { background: lighten(@tree-view-header-color, 7%); }
-    &:nth-child(9)  { background: lighten(@tree-view-header-color, 8%); }
-    &:nth-child(10) { background: lighten(@tree-view-header-color, 9%); }
+    position: relative;
+    background: @tree-view-header-color;
+
+    &:not(:first-child) > .header {
+      margin-top: 15px;
+    }
   }
 
   // PROJECT HEADER
@@ -26,10 +22,11 @@ atom-panel-container {
     color:       @tree-view-header-text-color;
     font-size:   15px;
     font-weight: 300;
+    font-family: Menlo;
     width:       100%;
     height:      @top-bar;
     line-height: @top-bar;
-    padding:     15px 0 0 8px;
+    padding:     12px 0 0 8px;
 
     &:hover {
       background: #000;

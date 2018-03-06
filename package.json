@@ -1,7 +1,7 @@
 {
   "name": "subzero-ui",
   "theme": "ui",
-  "version": "1.10.0",
+  "version": "1.0.0",
   "license": "MIT",
   "engines": {
     "atom": ">1.13.0"

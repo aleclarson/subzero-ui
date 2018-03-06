@@ -8,11 +8,26 @@ atom-panel-container.left, atom-panel-container.right {
   .entries.list-tree {
 
     .directory.entry.list-nested-item {
-      &.selected {
-        &::before {
-          margin-top: -5px;
-          height: 35px;
-        }
+
+      &:not(:first-child) {
+        margin-top: 10px;
+      }
+
+      &:last-of-type {
+        margin-bottom: 10px;
+      }
+
+      &.selected::before {
+        margin-top: -5px;
+        height: 35px;
+      }
+
+      & > .entries.list-tree {
+        padding-top: 10px;
+      }
+
+      & > .header::before {
+        transform: translateY(2px);
       }
     }
 
@@ -20,9 +35,7 @@ atom-panel-container.left, atom-panel-container.right {
     .directory.entry.list-nested-item, .file.entry.list-item {
       color: @tree-view-text-color;
       font-weight: 300;
-      letter-spacing: 0.1em;
-      padding-top: 3px;
-      padding-bottom: 3px;
+      font-family: Menlo;
 
       // SELECTED STATE
       &.selected {

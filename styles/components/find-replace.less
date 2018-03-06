@@ -1,47 +1,70 @@
 .project-find, .find-and-replace {
 
   // INPUTS
-  .input-small(@input-background-color, @input-text-color);
+  .input-small(darken(@bkg, 2%), darken(@var-color, 8%));
+
+  .placeholder-text {
+    color: inherit;
+    opacity: 0.4;
+  }
 
   // HEADER
   .header {
     &-item.description {
-      color: @white;
+      color: @func-color;
       .subtle-info-message {
-        color: @grey-light;
+        color: inherit;
       }
+    }
+  }
+
+  .options-label {
+    color: @keyword-color;
+
+    .options {
+      color: @txt;
     }
   }
 
   // BUTTONS
   .btn-group {
-    .btn { transition: background 0.3s; }
-    &-find .btn {
-    background: @seti-primary;
-    color: @seti-primary-text;
-    &:hover {
-      background-color: @seti-primary-highlight;
-      color: @seti-primary-text;
-    }
-    }
-    &-replace .btn {
-      background: darken(@bad, 20%);
-      color: @white;
-      &:hover {
-        background-color: darken(@bad, 30%);
+    color: @txt;
+
+    &-replace .btn, &-replace-all .btn {
+      @btn-color: darken(saturate(@err-color, 20%), 18%);
+      background: @btn-color;
+      color: rgba(255, 255, 255, 0.85);
+
+      &:not(.disabled):hover {
+        color: white;
+        background-color: lighten(@btn-color, 6%);
       }
     }
-    &-replace-all .btn {
-      background: @bad;
-      color: @white;
-      &:hover {
-        background-color: lighten(@bad, 10%);
-      }
-    }
+
     .btn.selected > .icon {
-      fill: @white;
-      stroke: @white;
+      fill: white;
+      stroke: white;
     }
   }
+}
 
+.btn-group > .btn {
+  border-radius: 0;
+  background: lighten(@bkg, 10%);
+  transition: background-color 0.2s;
+
+  &:not(.disabled):hover {
+    color: lighten(@txt, 16%);
+    background-color: lighten(@bkg, 16%);
+  }
+
+  &:first-child {
+    border-top-left-radius: 2px;
+    border-bottom-left-radius: 2px;
+  }
+
+  &:last-child {
+    border-top-right-radius: 2px;
+    border-bottom-right-radius: 2px;
+  }
 }

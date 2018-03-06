@@ -1,11 +1,43 @@
 // TOOLTIPS
 .tooltip {
+  opacity: 1;
   font-size: 12px;
   font-family: @seti-font-family;
 
+  @tip-color: shade(lighten(@bkg, 30%), 30%);
+
   .tooltip-inner {
+    color: @var-color;
+    opacity: 1;
     padding: 10px 15px;
     max-width: 500px;
+    background: @tip-color;
+    border-radius: 3px;
+  }
+
+  &.top .tooltip-arrow {
+    border-top-color: @tip-color;
+  }
+  &.top-left .tooltip-arrow {
+    border-top-color: @tip-color;
+  }
+  &.top-right .tooltip-arrow {
+    border-top-color: @tip-color;
+  }
+  &.right .tooltip-arrow {
+    border-right-color: @tip-color;
+  }
+  &.left .tooltip-arrow {
+    border-left-color: @tip-color;
+  }
+  &.bottom .tooltip-arrow {
+    border-bottom-color: @tip-color;
+  }
+  &.bottom-left .tooltip-arrow {
+    border-bottom-color: @tip-color;
+  }
+  &.bottom-right .tooltip-arrow {
+    border-bottom-color: @tip-color;
   }
 }
 

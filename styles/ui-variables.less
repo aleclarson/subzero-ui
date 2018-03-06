@@ -15,7 +15,7 @@
 @black-dark: #090b0d;
 @white: #d4d7d6;
 @grey: #4d5a5e;
-@grey-dark: #1f2326;
+@grey-dark: tint(@bkg, 3%);
 @grey-light: #6d8086;
 
 // THEME COLORS
@@ -55,20 +55,20 @@
 @base-color: @seti-primary;
 @base-background-color: @black;
 @base-border-color: #060708;
-@app-background-color: @black;
+@app-background-color: @bkg;
 
 // SIDEBAR
-@tree-view-background-color: lighten(@black, 3%);
+@tree-view-background-color: @bkg;
 @tree-view-border-color: @base-border-color;
-@tree-view-highlight: lighten(@black, 10%);
-@tree-view-header-color: #090b0d;
-@tree-view-header-text-color: @white;
-@tree-view-text-color: @white;
+@tree-view-highlight: lighten(@bkg, 5%);
+@tree-view-header-color: @bkg;
+@tree-view-header-text-color: tint(@txt, 10%);
+@tree-view-text-color: @txt;
 
 // TAB
-@top-bar: 60px;
+@top-bar: 50px;
 @top-bar-small: 40px;
-@tab-bar-background-color: lighten(@black, 3%);
+@tab-bar-background-color: @bkg;
 @tab-bar-border-color: @base-border-color;
 @tab-background-color: @grey-dark;
 @tab-text-color: #d4d7d6;
@@ -83,7 +83,7 @@
 @bad: @red;
 @warn: @yellow;
 @hidden: @grey-dark;
-@ignore: #41535b;
+@ignore: lighten(@bkg, 20%);
 
 
 // - - - - - - - - - - - - - - - - - - - - - - - -
@@ -158,8 +158,8 @@
 
 
 // MISC
-@seti-font-family: 'Roboto', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
-@font-family: 'Roboto', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
+@seti-font-family: 'Open Sans', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
+@font-family: 'Open Sans', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
 @font-size: 12px;
 @disclosure-arrow-size: 12px;
 
