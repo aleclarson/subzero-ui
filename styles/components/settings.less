@@ -37,25 +37,8 @@ atom-workspace {
 
     .search-container {
       button.btn {
-        background: @grey-dark;
-        color: @white;
         height: 43px;
         padding: 10px 20px;
-        transition: background 0.3s;
-
-        &.selected {
-          background: @seti-primary;
-          color: @seti-primary-text;
-          &:hover {
-            background-color: @seti-primary-highlight;
-            color: @seti-primary-text;
-          }
-        }
-
-        &:hover {
-          background-color: @grey;
-          color: @white;
-        }
       }
 
       .alert-info.search-message {
@@ -102,25 +85,14 @@ atom-workspace {
       color: #848c89;
       padding: 0;
 
-      button.btn {
-        background: @seti-primary;
-        color: @seti-primary-text;
-        transition: background 0.3s;
-
-        &:hover {
-          background-color: @seti-primary-highlight;
-          color: @seti-primary-text;
-        }
-      }
-
       li {
 
         a {
           transition: ease 0.5s background;
           &.icon {
-            color: @white;
+            color: @txt;
             &::before {
-              color: @grey;
+              color: inherit;
               width: 25px;
             }
           }
@@ -325,29 +297,6 @@ atom-workspace {
         }
         &:hover::before {
           color: @seti-primary;
-        }
-      }
-      &.settings {
-        // background: @seti-primary-highlight;
-      }
-      &.uninstall-button {
-        background: @red;
-        color: @white;
-        transition: background 0.3s;
-
-        &:hover {
-          background-color: darken(@red, 10%);
-          color: @white;
-        }
-      }
-      &.install-button {
-        // font-weight: 500;
-        background: @seti-primary;
-        color: @white;
-        transition: background 0.3s;
-        &:hover {
-          background-color: darken(@seti-primary, 10%);
-          color: @seti-primary-text;
         }
       }
     }
