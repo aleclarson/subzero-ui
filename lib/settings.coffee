@@ -48,22 +48,8 @@ module.exports =
     # GET OUR PACKAGE INFO
     pkg = atom.packages.getLoadedPackage('subzero-ui')
 
-    # THEME DATA
-    themeData = '@seti-primary: @' + theme.toLowerCase() + ';'
-    themeData = themeData + '@seti-primary-text: @' + theme.toLowerCase() + '-text;'
-    themeData = themeData + '@seti-primary-highlight: @' + theme.toLowerCase() + '-highlight;'
-
     # SAVE TO ATOM CONFIG
     atom.config.set 'subzero-ui.themeColor', theme
-
-    # SAVE USER THEME FILE
-    fs.writeFile pkg.path + '/styles/user-theme.less', themeData, (err) ->
-      if !err
-        if previous
-          el.classList.remove 'seti-theme-' + previous.toLowerCase()
-          el.classList.add 'seti-theme-' + theme.toLowerCase()
-        if reload
-          self.refresh()
 
   # SET TAB SIZE
   animate: (val) ->
