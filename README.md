@@ -1,4 +1,4 @@
-# subzero-ui v1.0.1
+# subzero-ui v1.0.2
 
 Based off https://github.com/jesseweed/seti-ui
 
