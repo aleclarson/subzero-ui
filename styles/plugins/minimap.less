@@ -1,0 +1,13 @@
+atom-text-editor-minimap {
+  .minimap-visible-area {
+    opacity: 1;
+  }
+  .minimap-visible-area::after {
+    opacity: 0.1;
+    background-color: lighten(@bkg, 30%) !important;
+  }
+  .minimap-scroll-indicator {
+    opacity: 0.3;
+    background-color: lighten(@bkg, 30%) !important;
+  }
+}

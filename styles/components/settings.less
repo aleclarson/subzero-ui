@@ -1,35 +1,28 @@
-atom-workspace.seti-compact {
-
-  .settings-view .section {
-    padding: 20px;
-  }
-
-  atom-pane-container atom-pane .item-views .pane-item {
-    .section-heading {
-      font-size: 2em;
-      font-weight: 300;
-    }
-    .sub-section-heading {
-      .section-heading {
-        font-size: 1.5em;
-        font-weight: 300;
-      }
-    }
-  }
-
-  .item-views .pane-item .native-key-bindings.breadcrumb {
-    font-size: 1.5em;
-    font-weight: 300;
-    padding: 5px 10px;
-  }
-
-}
-
 atom-workspace {
 
   atom-pane-container atom-pane .item-views .pane-item {
     color: @txt;
     background: @bkg;
+
+    .input(darken(@func-color, 80%), @func-color);
+
+    atom-text-editor[mini] {
+      border: 1px solid darken(@func-color, 25%);
+      border-radius: 4px;
+
+      .syntax--text.syntax--plain {
+        color: darken(@func-color, 10%);
+      }
+
+      .placeholder-text {
+        color: darken(@func-color, 25%);
+      }
+
+      &:active, &.is-focused {
+        color: @func-color;
+        border-color: @func-color;
+      }
+    }
 
     .themes-label {
       font-weight: 300;
@@ -43,14 +36,14 @@ atom-workspace {
 
       .alert-info.search-message {
         background: @black-dark;
-        color: @white;
+        color: @txt;
       }
     }
 
     .native-key-bindings {
 
       .is-user {
-        background: @seti-primary;
+        background: @seti-bkg;
         color: @seti-primary-text;
         .source {
           color: @seti-primary-text;
@@ -71,8 +64,6 @@ atom-workspace {
         .link-color();
       }
     }
-
-    .input();
 
     .text {
       line-height: 150%;
@@ -133,8 +124,8 @@ atom-workspace {
         }
         &.updates-container, .package-container {
           div.alert {
-            background: @black-dark;
-            color: @white;
+            background: @bkg;
+            color: @txt;
 
             &.icon{
               padding-top: 5px;
@@ -158,48 +149,60 @@ atom-workspace {
                 font-size: 16px;
                 margin-right: 10px;
                 top: 0px;
-                color: @grey;
+                color: @txt;
               }
             }
           }
         }
       }
       &-body {
+        & > .control-group {
+          border: 1px solid lighten(@bkg, 3%);
+          border-radius: 4px;
+        }
         .control-group {
-          background: @grey-dark;
-          padding: 5px 10px;
-          margin: 0;
+          color: @txt;
+          background: darken(@bkg, 1%);
+          padding: 8px 18px;
+          margin: 10px 0;
 
           .setting-title {
+            color: inherit;
+          }
+          .sub-section-heading {
+            margin-top: 6px;
 
+            &.has-items::after {
+              color: inherit;
+              top: 3px;
+            }
           }
         }
       }
       &-heading {
         font-family: @seti-font-family;
-        font-size: 3.5em;
-        font-weight: 100;
-        color: @white;
+        font-size: 2.2em;
+        font-weight: 300;
+        color: @func-color;
 
         &.icon::before {
           display: none;
         }
 
         &-count {
-          background: @seti-primary;
-          color: @white;
+          background: @seti-bkg;
+          color: inherit;
           font-size: 0.5em;
         }
 
         &-title {
-          color: @white;
+          color: inherit;
           font-size: 1.5em;
           margin: -3px 0 5px 0 ;
         }
 
         &-description {
-          color: @white;
-          color: rgba(255,255,255,0.5);
+          color: inherit;
           font-family: @seti-font-family;
           font-size: 13px;
         }
@@ -210,7 +213,7 @@ atom-workspace {
           position: relative;
           top: -3px;
           font-size: 35px;
-          color: @grey;
+          color: inherit;
         }
       }
 
@@ -224,15 +227,15 @@ atom-workspace {
       }
 
       &-heading {
-        color: @white;
-        font-size: 2em;
+        color: inherit;
+        font-size: 1.75em;
         font-weight: 100;
 
         &::before {
           height: 25px;
           width: 25px;
           font-size: 25px;
-          color: @grey;
+          color: inherit;
         }
       }
     }
@@ -255,32 +258,35 @@ atom-workspace {
 
       // README
       &-readme {
-        color: @white;
+        color: @txt;
         h1, h2, h3, h4, h5, h6 {
           font-weight: 100;
           line-height: 150%;
-          color: @white;
+          color: lighten(@txt, 10%);
         }
         h6 {
           font-weight: 300;
         }
         p, li {
-          color: darken(@white, 20%);
+          color: darken(@txt, 15%);
           line-height: 150%;
         }
         strong {
           font-family: @seti-font-family;
           font-weight: 500;
         }
+        pre {
+          background: @seti-bkg;
+          border: 0.5px solid lighten(@seti-bkg, 5%);
+        }
         code {
           color: @seti-primary;
-          background: @seti-primary-text;
+          background: transparent;
           font-size: 12px;
           font-weight: 100;
           margin: 0 2px;
         }
       }
-
     }
 
     button.btn {
@@ -305,8 +311,20 @@ atom-workspace {
 
 
   // INPUTS
-  .settings-view input[type="checkbox"]:checked {
-    background-color: @seti-primary;
+  .settings-view input[type="checkbox"] {
+    border: 1px solid lighten(@seti-bkg, 6%);
+    border-radius: 2px;
+    background-color: @seti-bkg;
+
+    &:checked {
+      @color: shade(desaturate(@lime, 15%), 20%);
+      border: none;
+      background-color: @color;
+
+      &:before, &:after { // icon color
+        background-color: white;
+      }
+    }
   }
 
   .control-label {
@@ -318,15 +336,24 @@ atom-workspace {
   }
 
   .settings-view {
+    color: @txt;
+
     .select-container .form-control {
-      background: @grey;
-      transition: 0.25s background;
+      background: @bkg;
+      transition: 0.25s background-color;
       &:hover {
-        background: @grey-dark;
+        background: darken(@bkg, 2%);
         cursor: pointer;
       }
     }
 
-  }
+    .settings-panel label {
+      color: inherit;
+    }
 
+    .setting-title,
+    .setting-description {
+      color: shade(@txt, 20%);
+    }
+  }
 }

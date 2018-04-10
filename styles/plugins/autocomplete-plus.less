@@ -1,50 +1,49 @@
 autocomplete-suggestion-list {
-  color: @white;
   &.select-list.popover-list {
-    background: @black;
-    color: @white;
+    color: shade(@txt, 15%);
+    background: @bkg;
+    border: 1px solid lighten(@bkg, 6%);
+    border-radius: 4px;
+    overflow: hidden;
 
-    ol.list-group {
-      li {
-        color: @white;
-        &.selected {
-          background: @seti-primary;
-          color: @seti-primary-text;
-          .word {
-            .character-match {
-              color: @seti-primary-highlight;
-            }
-          }
-          .left-label{
-            color: @seti-primary-text;
-          }
-          .right-label{
-            color: @seti-primary-text;
-          }
-          &::before {
-            display: none;
-          }
+    ol.list-group li {
+      color: inherit;
+
+      &.selected {
+        background: lighten(@bkg, 3%);
+        color: @txt;
+
+        .word .character-match {
+          font-weight: normal;
+          color: @func-color;
         }
-        .word {
-          color: @white !important;
-          .character-match {
-            color: @seti-primary;
-          }
+
+        &::before {
+          display: none;
+        }
+      }
+
+      .word {
+        color: inherit !important;
+        .character-match {
+          font-weight: normal;
+          color: shade(@func-color, 15%);
         }
       }
     }
 
     .suggestion-description {
-      background: lighten(@black, 3%);
-      border: solid 1px @black;
+      padding-top: 4px;
+      background: inherit;
       &-content {
-        color: @white;
+        color: shade(@txt, 15%);
         font-family: @seti-font-family;
         font-weight: 300;
         font-size: 0.9em;
       }
       &-more-link {
-        color: @seti-primary;
+        color: @func-color;
+        font-weight: 600;
         font-family: @seti-font-family;
         font-size: 0.9em;
       }
